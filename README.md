@@ -7,13 +7,30 @@ Krpano 可以方便快速的构建出全景图或全景视频
 [https://krpano.milly.me/](link1)  
 [http://www.krpano360.com/](link2)
 
+GitHub: [nodeKrpano](github)
+
 ## 目录
 
-* [Krpano Droplet](#Krpano-Droplet)
-	* [MAKE PANO (NORMAL)](#MAKE-PANO-(NORMAL))
-	* [MAKE PANO (MULTIRES)](#MAKE-PANO-(MULTIRES))
-* [vtour 文件夹说明](#vtour 文件夹说明)
+* [Krpano Droplet](#krpano-droplet)
+	* [MAKE PANO (NORMAL)](#make-pano-normal)
+	* [MAKE PANO (MULTIRES)](#make-pano-multires)
+	* [MAKE PANO (SINGLESWF)](#make-pano-singleswf)
+	* [MAKE PANO (FLAT)](#make-pano-flat)
+	* [MAKE VTOUR (NORMAL)](#make-vtour-normal)
+	* [MAKE VTOUR (MULTIRES)](#make-vtour-multires)
+	* [MAKE OBJECT](#make-object)
+	* [Convert SPHERE to CUBE](#convert-sphere-to-cube)
+	* [Convert CUBE to SPHERE](#convert-cube-to-sphere)
+	* [Encrypt XML](#encrypt-xml)
 * [vtour 文件夹说明](#vtour-文件夹说明)
+	* [vtour 文件夹结构](#vtour-文件夹结构)
+	* [vtour 运作机制](#vtour-运作机制)
+* [krpano XML结构](#krpano-xml结构)
+	* [Krpano 内置元素说明](#krpano-内置元素说明)
+* [常用设置](#常用设置)
+	* [小行星开场](#小行星开场)
+	* [加载动画](#加载动画)
+	* [修改右键菜单](#修改右键菜单)
 
 
 ## Krpano Droplet
@@ -28,7 +45,7 @@ Krpano 可以方便快速的构建出全景图或全景视频
 - 支持 ``Flash`` 和 ``HTML5``
 
 **Droplet 说明**
-- 
+
 - 配置文件: ``normal.config``
 - 默认模版/皮肤配置文件: ``defaultbuttons.skin``
 
@@ -351,3 +368,4 @@ area 元素控制全景图在浏览器窗口中显示区域大小。
 
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
+[github]:https://github.com/NalvyBoo/nodeKrpano/
