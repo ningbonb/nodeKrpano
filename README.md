@@ -12,6 +12,9 @@ Krpano 可以方便快速的构建出全景图或全景视频
 * [Krpano Droplet](#Krpano-Droplet)
 	* [MAKE PANO (NORMAL)](#MAKE-PANO-(NORMAL))
 	* [MAKE PANO (MULTIRES)](#MAKE-PANO-(MULTIRES))
+* [vtour 文件夹说明](#vtour 文件夹说明)
+* [vtour 文件夹说明](#vtour-文件夹说明)
+
 
 ## Krpano Droplet
 
