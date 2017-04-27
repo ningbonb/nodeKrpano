@@ -1,5 +1,5 @@
 # krpano
-Krpano 可以方便快速的构建出全景图或全景视频
+Krpano 可以方便快速的构建出全景图或全景视频([demo][demo])
 
 ## 目录
 
@@ -27,10 +27,10 @@ Krpano 可以方便快速的构建出全景图或全景视频
 ----------
 
 原文链接：  
-[https://krpano.milly.me/](link1)  
-[http://www.krpano360.com/](link2)
+[https://krpano.milly.me/][link1]
+[http://www.krpano360.com/][link2]
 
-GitHub: [nodeKrpano](github)
+GitHub: [nodeKrpano][github]
 
 
 ## Krpano Droplet
@@ -413,3 +413,4 @@ area 元素控制全景图在浏览器窗口中显示区域大小。
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
 [github]:https://github.com/NalvyBoo/nodeKrpano/
+[demo]:http://go.163.com/2015/public/team/ningbo/krpano/normal02/
