@@ -1,14 +1,6 @@
 # krpano
 Krpano 可以方便快速的构建出全景图或全景视频
 
-----------
-
-原文链接：  
-[https://krpano.milly.me/](link1)  
-[http://www.krpano360.com/](link2)
-
-GitHub: [nodeKrpano](github)
-
 ## 目录
 
 * [Krpano Droplet](#krpano-droplet)
@@ -32,6 +24,14 @@ GitHub: [nodeKrpano](github)
 	* [加载动画](#加载动画)
 	* [修改右键菜单](#修改右键菜单)
 
+----------
+
+原文链接：  
+[https://krpano.milly.me/](link1)  
+[http://www.krpano360.com/](link2)
+
+GitHub: [nodeKrpano](github)
+
 
 ## Krpano Droplet
 
@@ -49,6 +49,10 @@ GitHub: [nodeKrpano](github)
 - 配置文件: ``normal.config``
 - 默认模版/皮肤配置文件: ``defaultbuttons.skin``
 
+
+----------
+
+
 ### MAKE PANO (MULTIRES)
 **用法说明**
 
@@ -63,6 +67,10 @@ GitHub: [nodeKrpano](github)
 配置文件: ``multiresconfig``
 默认模版/皮肤配置文件: ``defaultbuttonsskin``
 
+
+----------
+
+
 ### MAKE PANO (SINGLESWF)
 **用法说明**
 
@@ -76,6 +84,10 @@ GitHub: [nodeKrpano](github)
 
 配置文件: ``singleswfconfig``
 默认模版/皮肤配置文件: ``defaultbuttonsskin``
+
+
+----------
+
 
 ### MAKE PANO (FLAT)
 **用法说明**
@@ -92,6 +104,9 @@ GitHub: [nodeKrpano](github)
 - 默认模版/皮肤配置文件: ``flatxml / flatskinxml``
 
 
+----------
+
+
 ### MAKE VTOUR (NORMAL)
 **用法说明**
 
@@ -105,6 +120,10 @@ GitHub: [nodeKrpano](github)
 
 - 配置文件: ``vtour-normalconfig``
 - 默认模版/皮肤配置文件: ``vtourskin-thumbnails-bingmaps-gyroskin``
+
+
+----------
+
 
 ### MAKE VTOUR (MULTIRES)
 **用法说明**
@@ -120,6 +139,10 @@ GitHub: [nodeKrpano](github)
 - 配置文件: ``vtour-multiresconfig``
 - 默认模版/皮肤配置文件: ``vtourskin-thumbnails-bingmaps-gyroskin``
 
+
+----------
+
+
 ### MAKE OBJECT
 **用法说明**
 
@@ -134,6 +157,10 @@ GitHub: [nodeKrpano](github)
 - 配置文件: ``objectconfig``
 - 默认模版/皮肤配置文件: ``objectxml / objectskinxml``
  
+
+----------
+
+
 ### Convert SPHERE to CUBE
 **用法说明**
 
@@ -143,6 +170,9 @@ GitHub: [nodeKrpano](github)
 **Droplet 说明**
 
 - 配置文件: ``convertdropletsconfig``
+
+
+----------
 
 
 ### Convert CUBE to SPHERE
@@ -155,6 +185,10 @@ GitHub: [nodeKrpano](github)
 
 - 配置文件: ``convertdropletsconfig``
 
+
+----------
+
+
 ### Encrypt XML
 **用法说明**
 
@@ -162,9 +196,16 @@ GitHub: [nodeKrpano](github)
 - 加密过程中 ``xml`` 文件会自动被压缩
 
 
+----------
+
+
 ### 自定义 droplet
 
 如果内置 ``droplet`` 不能满足需求或者需要对一些参数进行自定义。只要复制并重命名一个配置文件与皮肤配置文件，然后复制并重命名一个 ``droplet ``，修改里面的配置路径即可。
+
+
+----------
+
 
 ## vtour 文件夹说明
 
@@ -356,6 +397,9 @@ area 元素控制全景图在浏览器窗口中显示区域大小。
     <item name="fv" caption="鱼眼视图" onclick="skin_view_fisheye();" showif="view.vlookatrange == 180" devices="flash|webgl" separator="true" />
 </contextmenu>
 ```
+  
+  
+
 
 **contextmenu元素**
 
