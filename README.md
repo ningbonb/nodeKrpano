@@ -23,6 +23,11 @@ Krpano 可以方便快速的构建出全景图或全景视频([demo][demo])
 	* [小行星开场](#小行星开场)
 	* [加载动画](#加载动画)
 	* [修改右键菜单](#修改右键菜单)
+	* [自定义热点](#自定义热点)
+	* [隐藏皮肤](#隐藏皮肤)
+	* [添加动态热点](#动态热点)
+	* [动态热点添加始终显示的文字](#动态热点添加始终显示的文字)
+	* [热点和或图层在鼠标点击或鼠标悬停时进入动态模式](#热点和或图层在鼠标点击或鼠标悬停时进入动态模式)
 
 ----------
 
@@ -409,6 +414,199 @@ area 元素控制全景图在浏览器窗口中显示区域大小。
 - ``devices`` 控制在 ``flash/webgl`` 哪个模式中出现
 - ``separator`` 显示分隔符来分隔菜单
 
+### 自定义热点
+
+配置 ``<hotspot>`` 中 ``style`` 的属性对应的元素（``skin``对应的文件夹）
+
+```xml
+<hotspot name="spot1" style="skin_hotspotstyle" ath="93.531" atv="-1.109" linkedscene="scene_shuilifang" />
+```
+
+```xml
+<!-- skin_hotspotstyle - style for the hotspots -->
+	<style name="skin_hotspotstyle" url="vtourskin_hotspot.png" scale="0.5" edge="top" distorted="true"
+	       tooltip=""
+	       linkedscene=""
+	       linkedscene_lookat=""
+	       onclick="skin_hotspotstyle_click();"
+	       onover="tween(scale,0.55);"
+	       onout="tween(scale,0.5);"
+	       onloaded="if(linkedscene AND skin_settings.tooltips_hotspots, copy(tooltip,scene[get(linkedscene)].title); loadstyle(skin_tooltips); );"
+	       />
+```
+
+### 隐藏皮肤
+
+```xml
+<action name="startup" autorun="onstart">
+	<!--添加代码 隐藏皮肤 -->
+	set(events[skin_events].name, null);
+  	for(set(i,0), i LT layer.count, inc(i), 
+	copy(layername, layer[get(i)].name);
+	subtxt(namestart, get(layername), 0, 5);
+	if(namestart == 'skin_', removelayer(get(layername)); dec(i); );
+  );
+</action>
+```
+
+### 动态热点
+
+在 `tour.xml` 空白处的scene标签的外面，添加动作代码
+
+```xml
+<action name="do_crop_animation">
+	<!-- 为热点注册属性 -->
+	registerattribute(xframes, calc((imagewidth / %1) BOR 0));
+	registerattribute(yframes, calc((imageheight / %2) BOR 0));
+	registerattribute(frames, calc(xframes * yframes));
+	registerattribute(frame, 0);
+ 
+	set(crop, '0|0|%1|%2');
+ 
+	setinterval(calc('crop_anim_' + name), calc(1.0 / %3),
+		if(loaded,
+			inc(frame);
+			if(frame GE frames, if(onlastframe !== null, onlastframe() ); set(frame,0); );
+			mod(xpos, frame, xframes);
+			div(ypos, frame, xframes);
+			Math.floor(ypos);
+			mul(xpos, %1);
+			mul(ypos, %2);
+			calc(crop, xpos + '|' + ypos + '|%1|%2');
+		  ,
+			clearinterval(calc('crop_anim_' + name));
+		  );
+	  );
+</action>
+```
+
+在 `hotspot` 或 `layer` 的代码添加代码， `do_crop_animation(每帧宽,每帧高,fps)`
+
+```xml
+url="explosion.png"  onloaded="do_crop_animation(100,100, 60)"
+```
+
+### 动态热点添加始终显示的文字
+
+显示 `<scene> title` 中的文字
+
+```xml
+<hotspot name="spot1" url="animatedhotspot_white.png" onloaded="do_crop_animation(64,64, 60);"   ath="-15" atv="-12" onclick="loadscene(get(linkedscene))" linkedscene="scene_01"/>
+```
+
+或者在 `<hotpsot> text` 中添加显示自定义的文字
+
+```xml
+<hotspot name="spot1" url="animatedhotspot_white.png" onloaded="do_crop_animation(64,64, 60);"   ath="-15" atv="-12" onclick="loadscene(get(linkedscene))" text="自定义文字"/>
+```
+
+在热点的 `onload` 事件中加上 `add_all_the_time_tooltip()`
+
+```xml
+onloaded="do_crop_animation(64,64, 60);add_all_the_time_tooltip()"
+```
+
+空白处加上 `action`
+
+```xml
+<action name="add_all_the_time_tooltip">
+	    txtadd(tooltipname, 'tooltip_', get(name));
+	    addplugin(get(tooltipname));
+	    txtadd(plugin[get(tooltipname)].parent, 'hotspot[', get(name), ']');
+	    set(plugin[get(tooltipname)].url,'%SWFPATH%/plugins/textfield.swf');
+	    set(plugin[get(tooltipname)].align,top);
+	    set(plugin[get(tooltipname)].edge,bottom);
+	    set(plugin[get(tooltipname)].x,0);
+	    set(plugin[get(tooltipname)].y,0);
+	    set(plugin[get(tooltipname)].autowidth,true);
+	    set(plugin[get(tooltipname)].autoheight,true);
+	    set(plugin[get(tooltipname)].vcenter,true);
+	    set(plugin[get(tooltipname)].background,true);
+	    set(plugin[get(tooltipname)].backgroundcolor,0x000000);
+	    set(plugin[get(tooltipname)].roundedge,5);
+	    set(plugin[get(tooltipname)].backgroundalpha,0.65);
+	    set(plugin[get(tooltipname)].padding,5);
+	    set(plugin[get(tooltipname)].border,false);
+	    set(plugin[get(tooltipname)].glow,0);
+	    set(plugin[get(tooltipname)].glowcolor,0xFFFFFF);
+	    set(plugin[get(tooltipname)].css,'text-align:center; color:#FFFFFF; font-family:MicrosoftYahei;  font-size:24px;');
+	    if(device.mobile,set(plugin[get(tooltipname)].css,'text-align:center; color:#FFFFFF; font-family:MicrosoftYahei; font-weight:bold; font-size:24px;');
+	    	);
+	    set(plugin[get(tooltipname)].textshadow,0);
+	    set(plugin[get(tooltipname)].textshadowrange,6.0);
+	    set(plugin[get(tooltipname)].textshadowangle,90);
+	    if(text == '' OR text === null,
+	    copy(plugin[get(tooltipname)].html,scene[get(linkedscene)].title),
+	    copy(plugin[get(tooltipname)].html,text)
+	    );    
+	    set(plugin[get(tooltipname)].enabled,false);	
+</action>
+```
+### 热点和或图层在鼠标点击或鼠标悬停时进入动态模式
+
+```xml
+<action name="do_crop_animation_onclick">	
+		if(hotspot[get(name)].animated === null OR hotspot[get(name)].animated == false,
+		    set(hotspot[get(name)].animated,true);
+			setinterval(calc('crop_anim_' + name), calc(1.0 / %3),			
+					inc(frame);
+					if(frame GE frames, if(onlastframe !== null, onlastframe() ); set(frame,0); );
+					mod(xpos, frame, xframes);
+					div(ypos, frame, xframes);
+					Math.floor(ypos);
+					mul(xpos, %1);
+					mul(ypos, %2);
+					calc(crop, xpos + '|' + ypos + '|%1|%2');			  				
+			  );
+			  ,
+            set(hotspot[get(name)].animated,false);  
+			clearinterval(calc('crop_anim_' + name));
+			set(crop, '0|0|%1|%2');	
+		  );
+</action>
+ 
+<action name="do_crop_animation_register">
+		registerattribute(xframes, calc((imagewidth / %1) BOR 0));
+		registerattribute(yframes, calc((imageheight / %2) BOR 0));
+		registerattribute(frames, calc(xframes * yframes));
+		registerattribute(frame, 0);
+		set(crop, '0|0|%1|%2');	
+</action>
+ 
+ 
+ 
+<!-- example hotspots -->
+<hotspot name="spot1" url="animatedhotspot_white.png" 
+		onover="do_crop_animation_onclick(64,64,60)" onout="do_crop_animation_onclick(64,64,60)"   ath="-15" atv="-12" onloaded="do_crop_animation_register(64,64)" />
+ 
+<hotspot name="spot1" url="animatedhotspot_white.png" 
+		onclick="do_crop_animation_onclick(64,64,60)"  ath="-15" atv="-12" onloaded="do_crop_animation_register(64,64)" />
+```
+
+以上代码执行了一次动态循环后，序列图停留在第一帧，如果只是需要执行一次动态循环，并且序列图停留在最后一帧的话，那么 `do_crop_animation_onclick` 需更改（区别就是 `frame` 这个变量没有重置为 0 ，并且没有重新设置 `crop` ）
+
+```xml
+<action name="do_crop_animation_onclick"> 
+    if(hotspot[get(name)].animated === null OR hotspot[get(name)].animated == false,
+        set(hotspot[get(name)].animated,true);
+      setinterval(calc('crop_anim_' + name), calc(1.0 / %3),  
+ 
+          inc(frame);
+          if(frame GE frames, if(onlastframe !== null, onlastframe() ); add(frame,frames,-1); );
+          mod(xpos, frame, xframes);
+          div(ypos, frame, xframes);
+          Math.floor(ypos);
+          mul(xpos, %1);
+          mul(ypos, %2);
+          calc(crop, xpos + '|' + ypos + '|%1|%2');               
+        );
+        ,
+        set(hotspot[get(name)].animated,false);  
+      clearinterval(calc('crop_anim_' + name));
+     
+      );
+</action>
+```
 
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
