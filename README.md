@@ -825,7 +825,7 @@ gyro="true"
 <plugin name="skin_gyro" enabled="true"/>
 ```
 
-###　场景过渡效果
+### 场景过渡效果
 
 修改全部过渡效果，只需修改 `<skin_settings />`中以下代码
 
