@@ -28,6 +28,14 @@ Krpano 可以方便快速的构建出全景图或全景视频([demo][demo])
 	* [添加动态热点](#动态热点)
 	* [动态热点添加始终显示的文字](#动态热点添加始终显示的文字)
 	* [热点和或图层在鼠标点击或鼠标悬停时进入动态模式](#热点和或图层在鼠标点击或鼠标悬停时进入动态模式)
+	* [拖拽热点](#拖拽热点)
+	* [添加简单的全景视频](#添加简单的全景视频)
+	* [添加雨雪特效](#添加雨雪特效)
+	* [自动旋转](#自动旋转)
+	* [无按钮控制的自动旋转](#无按钮控制的自动旋转)
+	* [按钮控制的自动旋转](#按钮控制的自动旋转)
+	* [添加陀螺仪](#添加陀螺仪)
+	* [场景过渡效果](#场景过渡效果)
 
 ----------
 
@@ -608,7 +616,248 @@ onloaded="do_crop_animation(64,64, 60);add_all_the_time_tooltip()"
 </action>
 ```
 
+### 拖拽热点
+
+在 `<hotspot/>` 中添加代码
+
+```xml
+	ondown="draghotspot();"
+```
+
+添加 action 代码
+
+```xml
+	<action name="draghotspot">
+		spheretoscreen(ath, atv, hotspotcenterx, hotspotcentery, 'l');
+		sub(drag_adjustx, mouse.stagex, hotspotcenterx);
+		sub(drag_adjusty, mouse.stagey, hotspotcentery);
+		asyncloop(pressed,
+			sub(dx, mouse.stagex, drag_adjustx);
+			sub(dy, mouse.stagey, drag_adjusty);
+			screentosphere(dx, dy, ath, atv);
+		  );
+	</action>
+```
+
+### 添加简单的全景视频
+
+从 `viewer/examples/videopano` 中复制 `vtourskin.xml`，在主xml 添加代码
+
+```xml
+	<scene name="videopano" title="户外全景视频">
+		<!-- include the videoplayer interface / skin (with VR support) -->
+		<include url="skin/videointerface.xml" />
+
+		<!-- include the videoplayer plugin -->
+		<plugin name="video"
+		        url.html5="%SWFPATH%/plugins/videoplayer.js"
+		        url.flash="%SWFPATH%/plugins/videoplayer.swf"
+		        pausedonstart="true"
+		        loop="true"
+		        volume="1.0"
+		        onloaded="add_video_sources();"
+		        />
+
+		<!-- use the videoplayer plugin as panoramic image source -->
+		<image>
+			<sphere url="plugin:video" />
+		</image>
+
+		<!-- set the default view -->
+		<view hlookat="0" vlookat="0" fovtype="DFOV" fov="130" fovmin="75" fovmax="150" distortion="0.0" />
+
+		<!-- add the video sources and play the video -->
+		<action name="add_video_sources">
+			videointerface_addsource('1024x512', '%CURRENTXML%/video/video-1024x512.mp4|%CURRENTXML%/video/video-1024x512.webm|%CURRENTXML%/video/iphone-audio.m4a', '%CURRENTXML%/video/video-1024x512-poster.jpg');
+			videointerface_addsource('1920x960', '%CURRENTXML%/video/video-1920x960.mp4|%CURRENTXML%/video/video-1920x960.webm|%CURRENTXML%/video/iphone-audio.m4a', '%CURRENTXML%/video/video-1920x960-poster.jpg');
+			
+			if(device.ios,
+				<!-- iOS Safari has a very slow 'video-to-webgl-texture' transfer, therefore use a low-res video by default -->
+				videointerface_play('1024x512');
+			  ,
+				videointerface_play('1920x960');
+			  );
+		</action>
+	</scene>
+```
+ 
+### 添加雨雪特效
+
+1. 添加文件 [http://pan.baidu.com/s/1gfLTx6N][snow] 密码：6shh  
+  
+2. 在 `viewer\plugins` 拷贝 `snow.swf` 和 `snow.js`  
+
+3. 添加  `<scene onstart="snowballs();">`  
+	
+	目前可选的特效
+	- 默认雪 `onstart='defaultsnow();'`
+	- 雪球 `onstart='snowball();'`
+	- 雪花 `onstart='snowflakes();'`
+	- 银色星星 `onstart='silverstars();'`
+	- 金色星星 `onstart='goldenstars();'`
+	- 心形 `onstart='hearts();'`
+	- 笑脸 `onstart='smileys();'`
+	- 钱 `onstart='money();'`
+	- 雨 `onstart='rain();'`
+	- 大雨 `onstart='heavyrain();'`
+
+4. 在 `<scene>` 添加代码
+
+```xml
+<include url="snow.xml" />
+``` 
+
+### 自动旋转
+
+添加代码
+
+```xml
+<autorotate enabled="true"
+waittime="5.0"
+speed="-3.0"
+horizon="0.0"
+tofov="120.0"
+/>
+```
+- `waittime` 代表在最近一次用户交互行为之后要开始自动旋转之前的等待时间。以秒为单位。  
+- `speed` 为旋转速度。当该数值为正值时向右旋转，为负值时向左旋转。
+- `horizon` 为场景在自动旋转时将达到的水平位置。
+- `tofov` 为旋转中要达到的视场角。
+
+
+### 无按钮控制的自动旋转
+自动旋转场景，场景旋转一圈后自动进入下一个场景，最后一个场景浏览结束后，进入第一个场景。需添加如下代码：
+
+```xml
+<autorotate enabled="true"
+waittime="5.0"
+speed="-3.0"
+horizon="0.0"
+tofov="120.0"
+/>
+```
+
+修改 `<action name="startup/>` 中的代码
+
+```xml
+<action name="startup">
+if(startscene === null, copy(startscene,scene[0].name));
+loadscene(get(startscene), null, MERGE);
+if(autorotate.enabled,bombtimer(0));
+</action>
+```
+
+在 `xml` 文件中加入下面的代码
+
+```xml
+<events onmousedown="set(bt,0);" />
+<action name="bombtimer">
+set(autorotate.enabled,true);
+set(bt,%1);
+add(bt,1);
+delayedcall(1, bombtimer(get(bt)));
+copy(bt_1,autorotate.speed);
+Math.abs(bt_1);
+div(bt_2,360,bt_1);
+add(bt_2,autorotate.waittime);
+if(bt GE bt_2, set(bt,0); nextscene(););
+</action>
+<action name="nextscene">
+set(ns, get(scene[get(xml.scene)].index));
+set(maxs, get(scene.count));
+add(ns,1);
+if(ns == maxs, set(ns,0));
+loadscene(get(scene[get(ns)].name), null, MERGE, BLEND(1.5));
+</action>
+```
+
+### 按钮控制的自动旋转
+添加代码
+
+```xml
+<autorotate enabled="true"
+waittime="5.0"
+speed="-3.0"
+horizon="0.0"
+tofov="120.0"
+/>
+```
+
+在对应的按钮，通常为 `<layer>` 标签中找到 `onclick` 属性替换，如果没有则直接添加
+
+```xml
+<layer ... onclick="switch(autorotate.enabled);" ... />
+```
+
+### 添加陀螺仪
+
+加载插件
+
+```xml
+<plugin name="gyro" devices="html5"
+	        url="%SWFPATH%/plugins/gyro2.js"
+	        enabled="false"
+                onavailable="gyro_available_info();"
+	        />
+ 
+<action name="gyro_available_info">
+		set(layer[gyrobutton].visible, true);
+</action>
+```
+
+控制按钮
+
+```xml
+<layer name="gyrobutton" url="gyroicon.png" scale="0.5" align="right" x="10" visible="false" 
+		       onclick="switch(plugin[gyro].enabled);"
+		       />
+```
+
+默认皮肤开启陀螺仪功能（在 `tour.xml` 的 `skin_settings`中设置）
+
+```
+gyro="true"
+```
+
+在 `tour.xml` 的 `include` 的下一行添加
+
+```xml
+<plugin name="skin_gyro" enabled="true"/>
+```
+
+###　场景过渡效果
+
+修改全部过渡效果，只需修改 `<skin_settings />`中以下代码
+
+```xml
+loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+```
+如果想为某个特殊的 `loadscene` 动作加上不一样的过渡效果，在主 `xml` 的 `scene` 外加入以下代码
+
+```xml
+<blendmodes name="no blending"       description="无过渡效果"  blend="NOBLEND" />
+<blendmodes name="simple crossblending" description="简单淡入淡出" blend="BLEND(1.0, easeInCubic)" />
+<blendmodes name="zoom blend"        description="缩放过渡"  blend="ZOOMBLEND(2.0, 2.0, easeInOutSine)" />
+<blendmodes name="black-out"         description="黑场过渡"  blend="COLORBLEND(2.0, 0x000000, easeOutSine)" />
+<blendmodes name="white-flash"       description="白场过渡"  blend="LIGHTBLEND(1.0, 0xFFFFFF, 2.0, linear)" />
+<blendmodes name="right-to-left"     description="从右至左"  blend="SLIDEBLEND(1.0, 0.0, 0.2, linear)" />
+<blendmodes name="top-to-bottom"     description="从上至下"   blend="SLIDEBLEND(1.0, 90.0, 0.01, linear)" />
+<blendmodes name="diagonal"          description="对角线"     blend="SLIDEBLEND(1.0, 135.0, 0.4, linear)" />
+<blendmodes name="circle open"       description="圆形展开"      blend="OPENBLEND(1.0, 0.0, 0.2, 0.0, linear)" />
+<blendmodes name="vertical open"     description="垂直展开"     blend="OPENBLEND(0.7, 1.0, 0.1, 0.0, linear)" />
+<blendmodes name="horizontal open"   description="水平展开"    blend="OPENBLEND(1.0, -1.0, 0.3, 0.0, linear)" />
+<blendmodes name="elliptic + zoom"   description="椭圆缩放"      blend="OPENBLEND(1.0, -0.5, 0.3, 0.8, linear)" />
+```
+
+修改`loadscene(scenename, null, MERGE, get(blendmodes[black-out].blend));`
+
+```xml
+<hotspot onclick="loadscene(scene_shuilifang, null, MERGE, get(blendmodes[vertical open].blend));" />
+```
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
 [github]:https://github.com/NalvyBoo/nodeKrpano/
-[demo]:http://go.163.com/2015/public/team/ningbo/krpano/normal02/
+[snow]:http://pan.baidu.com/s/1gfLTx6N
+[demo]:http://test.go.163.com/go/2015/public/team/ningbo/krpano/comn01/
