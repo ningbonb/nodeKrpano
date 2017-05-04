@@ -851,7 +851,7 @@ loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
 <blendmodes name="elliptic + zoom"   description="椭圆缩放"      blend="OPENBLEND(1.0, -0.5, 0.3, 0.8, linear)" />
 ```
 
-修改`loadscene(scenename, null, MERGE, get(blendmodes[black-out].blend));`
+修改 `loadscene(scenename, null, MERGE, get(blendmodes[black-out].blend));`
 
 ```xml
 <hotspot onclick="loadscene(scene_shuilifang, null, MERGE, get(blendmodes[vertical open].blend));" />
