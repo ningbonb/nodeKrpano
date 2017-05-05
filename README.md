@@ -822,7 +822,11 @@ gyro="true"
 在 `tour.xml` 的 `include` 的下一行添加
 
 ```xml
-<plugin name="skin_gyro" enabled="true"/>
+<plugin name="skin_gyro" 
+		enabled="true"
+		camroll="false"
+   		onenable="set(view.limitview, range);"
+		/>
 ```
 
 ### 场景过渡效果
