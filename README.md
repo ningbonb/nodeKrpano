@@ -1,5 +1,5 @@
 # krpano
-Krpano 可以方便快速的构建出全景图或全景视频([demo][demo])
+Krpano 可以方便快速的构建全景场景或全景视频([demo][demo])
 
 ## 目录
 
