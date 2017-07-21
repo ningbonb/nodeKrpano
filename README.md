@@ -905,7 +905,7 @@ loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
   copy(t1, plugin[video].time);
   if(t1 GT %1,%2);
 </action>
-
+ 
 <!-- 视频暂停回调 -->
 <action name="video_pause_events">
   plugin[video].pause();
