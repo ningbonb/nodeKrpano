@@ -36,6 +36,8 @@ Krpano 可以方便快速的构建全景场景或全景视频([demo][demo])
 	* [按钮控制的自动旋转](#按钮控制的自动旋转)
 	* [添加陀螺仪](#添加陀螺仪)
 	* [场景过渡效果](#场景过渡效果)
+	* [隐藏显示热点](#隐藏显示热点)
+	* [获取全景视频进度](#获取全景视频进度)
 
 ----------
 
@@ -860,6 +862,58 @@ loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
 ```xml
 <hotspot onclick="loadscene(scene_shuilifang, null, MERGE, get(blendmodes[vertical open].blend));" />
 ```
+
+### 隐藏显示热点
+添加 `<action>`
+
+```xml
+<action name="hideBox">
+  tween(%1.alpha,0,0.5);
+  wait(1);
+  set(%1.visible,false);
+</action>
+
+<action name="showBox">
+  set(%1.alpha,0);
+  set(%1.visible,true);
+  tween(%1.alpha,1,0.5);
+  tween(%1.scale,1,0.5,easeOutBack);
+</action>
+```
+
+使用
+```xml
+<hotspot name="spot1" style="skin_hotspotstyle" ath="46.131" atv="24.389" visible="true" onclick="spot1Click" />
+<action name="spot1Click">
+	hideBox(hotspot[spot1]);
+</action>
+```
+
+### 获取全景视频进度
+
+```xml
+<!-- 获取视频进度 -->
+<action name="get_video_time">
+  setinterval(skin_video_seek_updates0, 0.1, skin_video_updatetime0())
+</action>
+
+<action name="skin_video_updatetime0">
+  setStop(4,video_pause_events(););
+</action >
+		
+<action name="setStop">
+  copy(t1, plugin[video].time);
+  if(t1 GT %1,%2);
+</action>
+
+<!-- 视频暂停回调 -->
+<action name="video_pause_events">
+  plugin[video].pause();
+  clearinterval(skin_video_seek_updates0);
+</action>
+```
+
+
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
 [github]:https://github.com/NalvyBoo/nodeKrpano/
