@@ -38,6 +38,7 @@ Krpano 可以方便快速的构建全景场景或全景视频([demo][demo])
 	* [场景过渡效果](#场景过渡效果)
 	* [隐藏显示热点](#隐藏显示热点)
 	* [获取全景视频进度](#获取全景视频进度)
+	* [用js控制全景](#用js控制全景)
 
 ----------
 
@@ -910,6 +911,37 @@ loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
 <action name="video_pause_events">
   plugin[video].pause();
   clearinterval(skin_video_seek_updates0);
+</action>
+```
+
+### 用js控制全景
+
+js控制场景跳转
+
+```javascript
+// 场景跳转 index:0,1,2
+function krpanoTo(index){
+	var krpano = document.getElementById("krpanoSWFObject");
+	// 跳转到场景1
+	if(index == 0){ krpano.call("to0"); }
+	// 跳转到场景2
+	if(index == 1){ krpano.call("to1"); }
+	// 跳转到场景3
+	if(index == 2){ krpano.call("to2"); }
+}
+```
+
+```xml
+<action name="to0">
+	loadscene("scene_index1", null, MERGE);
+</action>
+
+<action name="to1">
+	loadscene("scene_index2", null, MERGE);
+</action>
+
+<action name="to2">
+	loadscene("scene_index3", null, MERGE);
 </action>
 ```
 
