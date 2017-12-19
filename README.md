@@ -794,7 +794,7 @@ tofov="120.0"
 
 ### 添加陀螺仪
 
-加载插件
+加载插件（此方法与上述隐藏皮肤的方法冲突）
 
 ```xml
 <plugin name="gyro" devices="html5"
