@@ -950,4 +950,4 @@ function krpanoTo(index){
 [link2]:http://www.krpano360.com/
 [github]:https://github.com/NalvyBoo/nodeKrpano/
 [snow]:http://pan.baidu.com/s/1gfLTx6N
-[demo]:http://test.go.163.com/go/2015/public/team/ningbo/krpano/comn01/
+[demo]:http://go.163.com/2015/public/team/ningbo/krpano/comn01/
