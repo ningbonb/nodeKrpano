@@ -1,5 +1,5 @@
 ## 前言
-Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](https://krpano.com)
+Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](https://krpano.com) 。
 
 ### 预览地址
 [demo][demo]
