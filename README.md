@@ -1,16 +1,20 @@
-# krpano
-Krpano 可以方便快速的构建全景场景或全景视频([demo][demo])
+## 前言
+Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](https://krpano.com)
+
+### 预览地址
+[demo][demo]
+
+### 版本说明
+本篇文章使用的版本为：krpano 1.19-pr16 (build 2018-04-04) Windows；文章更新前的版本为：krpano-1.19-pr10，文章将逐步更新为最新的 pr16 版本。
 
 ## 目录
 
-* [Krpano Droplet](#krpano-droplet)
+* [Krpano 功能简介](#krpano-功能简介)
 	* [MAKE PANO (NORMAL)](#make-pano-normal)
 	* [MAKE PANO (MULTIRES)](#make-pano-multires)
 	* [MAKE PANO (SINGLESWF)](#make-pano-singleswf)
-	* [MAKE PANO (FLAT)](#make-pano-flat)
 	* [MAKE VTOUR (NORMAL)](#make-vtour-normal)
 	* [MAKE VTOUR (MULTIRES)](#make-vtour-multires)
-	* [MAKE OBJECT](#make-object)
 	* [Convert SPHERE to CUBE](#convert-sphere-to-cube)
 	* [Convert CUBE to SPHERE](#convert-cube-to-sphere)
 	* [Encrypt XML](#encrypt-xml)
@@ -49,176 +53,106 @@ Krpano 可以方便快速的构建全景场景或全景视频([demo][demo])
 GitHub: [nodeKrpano][github]
 
 
-## Krpano Droplet
+## Krpano 功能简介
+官方软件安装之后，解压后的文件夹里主要有六种全景的模式，其中 `MAKE　PANO` 为单全景模式， `MAKE VTOUR` 为多个全景合集的 **虚拟漫游** 。
 
 ### MAKE PANO (NORMAL)
-**用法说明**
 
-- 生成普通 (=单分辨率) 全景
-- 制作典型的 360 度全景
-- 全部全景图将会一次性载入. 默认下方块最大变长为 2048 像素(可以在配置文件中修改)
-- 包括默认的导航皮肤
-- 支持 ``Flash`` 和 ``HTML5``
+#### 简介
 
-**Droplet 说明**
+1. 该模式为基础 360 单全景模式；
+2. 该模式生成的全景为 **单分辨率** 全景；
 
-- 配置文件: ``normal.config``
-- 默认模版/皮肤配置文件: ``defaultbuttons.skin``
+#### 配置路径
 
+- 默认模版/皮肤配置文件: `skin/defaultskin.xml`
 
 ----------
-
 
 ### MAKE PANO (MULTIRES)
-**用法说明**
 
-- 生成多分辨率全景
-- 制作所有类型的全景
-- 只有特定的切片在需要时载入 没有尺寸/分辨率限制
-- 包含默认的导航皮肤
-- 支持 ``Flash`` 和 ``HTML5``
+#### 简介
 
-**Droplet 说明**
+1. 该模式为 360 单全景模式；
+2. 多分辨率，可快速动态加载。
 
-配置文件: ``multiresconfig``
-默认模版/皮肤配置文件: ``defaultbuttonsskin``
+#### 配置路径
 
+默认模版/皮肤配置文件: `skin/defaultskin.xml`
 
 ----------
-
-
-### MAKE PANO (SINGLESWF)
-**用法说明**
-
-- 生成普通 (=单分辨率) 全景同时将所有文件嵌在一个SWF文件中只输出一个SWF文件和一个HTML文件
-- 制作典型的360度全景
-- 全部全景图将会一次性载入 默认下方块最大变长为2048像素(可以在配置文件中修改)
-- 包含默认的导航皮肤
-- 仅支持 ``Flash``
-
-**Droplet 说明**
-
-配置文件: ``singleswfconfig``
-默认模版/皮肤配置文件: ``defaultbuttonsskin``
-
-
-----------
-
 
 ### MAKE PANO (FLAT)
-**用法说明**
 
-- 生成平面切片多分辨率图像
-- 制作平面图像 输出时既定为平面图像
-- 只有特定的切片在需要时载入 没有尺寸/分辨率限制
-- 包含有默认导航按钮的皮肤，针对特定的视角
-- 支持 ``Flash`` 与 ``HTML5``
+#### 简介
 
-**Droplet 说明**
+1. 该模式为平铺模式；
+2. 仅支持 `Flash` 。
 
-- 配置文件: ``flatconfig``
-- 默认模版/皮肤配置文件: ``flatxml / flatskinxml``
+#### 配置路径
 
+- 默认模版/皮肤配置文件: `skin/defaultskin.xml`
 
 ----------
-
 
 ### MAKE VTOUR (NORMAL)
-**用法说明**
 
-- 生成普通 (=单分辨率) 全景并将它们整合到一个虚拟漫游中
-- 制作典型的 360 度全景
-- 全部全景图将会一次性载入 默认下方块最大变长为 2048 像素(可以在配置文件中修改)
-- 包含一个包括导航按钮、可滚动缩略图以及可选择必应地图以及重力感应插件的默认皮肤
-- 支持 ``Flash`` 和 ``HTML5``
+#### 简介
 
-**Droplet 说明**
+1. 生成普通（单分辨率）全景并将它们整合到一个虚拟漫游中；
+2. 全部全景图将会一次性载入，默认方块最大边长为 2048 像素（可以在配置文件中修改）；
+3. 包含一个包括导航按钮、可滚动缩略图的默认皮肤。
 
-- 配置文件: ``vtour-normalconfig``
-- 默认模版/皮肤配置文件: ``vtourskin-thumbnails-bingmaps-gyroskin``
+#### 配置路径
 
+- 默认模版/皮肤配置文件: `skin/vtourskin.xml`
 
 ----------
-
 
 ### MAKE VTOUR (MULTIRES)
-**用法说明**
 
-- 生成多分辨率全景并将它们整合到一个虚拟漫游中
-- 制作所有类型全景图像
-- 只有特定的切片在需要时载入 没有尺寸/分辨率限制
-- 包含一个包括导航按钮、可滚动缩略图以及可选择必应地图以及重力感应插件的默认皮肤
-- 支持 ``Flash`` 和 ``HTML5``
+#### 简介
 
-**Droplet 说明**
+1. 生成多分辨率全景并将它们整合到一个虚拟漫游中；
+2. 动态载入，没有尺寸/分辨率限制；
+3. 包含一个包括导航按钮、可滚动缩略图的默认皮肤。
 
-- 配置文件: ``vtour-multiresconfig``
-- 默认模版/皮肤配置文件: ``vtourskin-thumbnails-bingmaps-gyroskin``
+#### 配置路径
 
+- 默认模版/皮肤配置文件: `skin/vtourskin.xml`
 
 ----------
-
-
-### MAKE OBJECT
-**用法说明**
-
-- 生成若干个平面多分辨率图像并将它们整合到一个可缩放旋转的 360 物体影像中
-- 制作平面图像物体 所有物体图片的尺寸必须一致
-- 只有特定的切片在需要时载入 没有尺寸/分辨率限制
-- 包含一个特定的控制物体的皮肤
-- 仅支持 ``Flash``
-
-**Droplet 说明**
-
-- 配置文件: ``objectconfig``
-- 默认模版/皮肤配置文件: ``objectxml / objectskinxml``
- 
-
-----------
-
 
 ### Convert SPHERE to CUBE
-**用法说明**
 
-- 将球面图像转换至立方体图
-- 输出的立方体格式、尺寸以及图像尺寸可以在配置文件中修改
+#### 简介
 
-**Droplet 说明**
-
-- 配置文件: ``convertdropletsconfig``
-
+1. 将球面图像转换为立方体图。
 
 ----------
 
 
 ### Convert CUBE to SPHERE
-**用法说明**
 
-- 将六张立方体图像转换成一张球面全景图
-- 输出的图像尺寸和格式可以在配置文件中修改
+#### 简介
 
-**Droplet 说明**
-
-- 配置文件: ``convertdropletsconfig``
-
+1. 将六张立方体图像转换成一张球面全景图。
 
 ----------
 
-
 ### Encrypt XML
-**用法说明**
 
-- 将 ``xml`` 文件拖放进 ``droplet`` 进行加密
-- 加密过程中 ``xml`` 文件会自动被压缩
+#### 简介
 
+1. 将 `xml` 文件拖放进 `droplet` 进行加密；
+2. 加密过程中 `xml` 文件会自动被压缩；
 
 ----------
 
 
 ### 自定义 droplet
 
-如果内置 ``droplet`` 不能满足需求或者需要对一些参数进行自定义。只要复制并重命名一个配置文件与皮肤配置文件，然后复制并重命名一个 ``droplet ``，修改里面的配置路径即可。
-
+如果内置 `droplet` 不能满足需求或者需要对一些参数进行自定义。只要复制并重命名一个配置文件与皮肤配置文件，然后复制并重命名一个 `droplet `，修改里面的配置路径即可。
 
 ----------
 
