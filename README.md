@@ -5,36 +5,14 @@ Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](h
 [http://go.163.com/2015/public/team/ningbo/krpano/comn01/][demo]
 
 ### 版本说明
-本篇文章使用的版本为：krpano 1.19-pr16 (build 2018-04-04) Windows；文章更新前的版本为：krpano-1.19-pr10，文章将逐步更新为最新的 pr16 版本。
+本篇文章使用的版本为：`krpano 1.19-pr16 (build 2018-04-04)` ，操作系统为 ` Windows` 。
 
 ## 目录
 
 * [Krpano 功能简介](#krpano-功能简介)
-* [vtour 文件夹说明](#vtour-文件夹说明)
-	* [vtour 文件夹结构](#vtour-文件夹结构)
-	* [vtour 运作机制](#vtour-运作机制)
-* [krpano XML结构](#krpano-xml结构)
-	* [Krpano 内置元素说明](#krpano-内置元素说明)
+* [vtour 文件夹简介](#vtour-文件夹简介)
+* [krpano XML 结构与简介](#krpano-xml-结构与简介)
 * [常用设置](#常用设置)
-	* [小行星开场](#小行星开场)
-	* [加载动画](#加载动画)
-	* [修改右键菜单](#修改右键菜单)
-	* [自定义热点](#自定义热点)
-	* [隐藏皮肤](#隐藏皮肤)
-	* [添加动态热点](#动态热点)
-	* [动态热点添加始终显示的文字](#动态热点添加始终显示的文字)
-	* [热点和或图层在鼠标点击或鼠标悬停时进入动态模式](#热点和或图层在鼠标点击或鼠标悬停时进入动态模式)
-	* [拖拽热点](#拖拽热点)
-	* [添加简单的全景视频](#添加简单的全景视频)
-	* [添加雨雪特效](#添加雨雪特效)
-	* [自动旋转](#自动旋转)
-	* [无按钮控制的自动旋转](#无按钮控制的自动旋转)
-	* [按钮控制的自动旋转](#按钮控制的自动旋转)
-	* [添加陀螺仪](#添加陀螺仪)
-	* [场景过渡效果](#场景过渡效果)
-	* [隐藏显示热点](#隐藏显示热点)
-	* [获取全景视频进度](#获取全景视频进度)
-	* [用js控制全景](#用js控制全景)
 
 ## Krpano 功能简介
 官方软件安装之后，解压后的文件夹里主要有六种全景的模式，其中 `MAKE　PANO` 为单全景模式， `MAKE VTOUR` 为多个全景合集的 **虚拟漫游** 。
@@ -150,20 +128,24 @@ Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](h
 ----------
 
 
-## vtour 文件夹说明
+## vtour 文件夹简介
+
+###  vtour 文件夹说明目录
+* [vtour 文件夹结构](#vtour-文件夹结构)
+* [vtour 运作机制](#vtour-运作机制)
 
 ### vtour 文件夹结构
 
 ```
 vtour/
-| -- panos/             #存放全景切片图片的文件夹
-| -- skin/              #存放皮肤相关文件
-| -- plugins/           #用来存放插件
-| -- tour.swf           #krpano flash viewer
-| -- tour.js            #krpano HTML5 viewer
-| -- tour.xml           #生成全景的相关配置
-| -- tour.html          #用来浏览全景的页面，需要本地服务环境
-| -- tour_editor.html   #添加热点（hotspot）与初始化视角的设置
+| -- panos/             # 存放全景切片图片的文件夹
+| -- skin/              # 存放皮肤相关文件
+| -- plugins/           # 用来存放插件
+| -- tour.swf           # krpano flash viewer
+| -- tour.js            # krpano HTML5 viewer
+| -- tour.xml           # 生成全景的相关配置
+| -- tour.html          # 用来浏览全景的页面，需要本地服务环境
+| -- tour_editor.html   # 添加热点（hotspot）与初始化视角的设置
 ```
 
 ### vtour 运作机制
@@ -173,18 +155,18 @@ vtour/
 <script src="tour.js"></script>
 <script>
 embedpano({
-    swf: "tour.swf", //有则表示加载flash引擎，如果设置html5:only则不需要该值
-    xml: "tour.xml", //启动时的配置文件
-    target: "pano", //要渲染到的目标容器ID
-    html5: "only", //如果有需要用到flash，可设置为auto
-    //id: "krpanoSWFObject", //默认的krpano对象，每一个viewer对应唯一id，与JS交互时要用到
-    mobilescale: 1.0, //移动设备缩放，1表示不缩放，默认0.5
-    passQueryParameters: false //是否接受URL传参，例如：tour.html?html5=only&startscene=scene2
+    swf: "tour.swf", // 有则表示加载 flash 引擎，如果设置 html5:only 则不需要该值
+    xml: "tour.xml", // 启动时的配置文件
+    target: "pano", // 要渲染到的目标容器 ID
+    html5: "only", // 如果有需要用到 flash ，可设置为 auto
+    //id: "krpanoSWFObject", // 默认的 krpano 对象，每一个 viewer 对应唯一 id ，与 JS 交互时要用到
+    mobilescale: 1.0, //移动设备缩放，1 表示不缩放，默认 0.5
+    passQueryParameters: false //是否接受 URL 传参，例如：tour.html?html5=only&startscene=scene2
 });
 </script>
 ```
 
-## krpano XML结构
+## krpano XML 结构与简介
 
 ```xml
 <krpano>
@@ -215,107 +197,134 @@ embedpano({
 </krpano>
 ```
 
+### krpano XML结构目录
+
+* [Krpano 内置元素说明](#krpano-内置元素说明)
+
 ### Krpano 内置元素说明
 
-**01.krpano**
+#### 01.krpano
 
-``krpano`` 元素是 ``krpano xml`` 文件的根元素。任何一个 ``krpano xml`` 文件内的其它元素都要被 ``krpano`` 元素所嵌套。
+`krpano` 元素是 `krpano xml` 文件的根元素。任何一个 `krpano xml` 文件内的其它元素都要被 `krpano` 元素所嵌套。
 
-**02.include**
+#### 02.include
 
-``include`` 元素可引入其它 ``xml`` 文件的内容，例如我们常要用到的 ``vtourskin.xml`` 就是使用 ``include`` 嵌入到主 ``xml`` 中。
+`include` 元素用来引入其它 `xml` 文件的内容。例如我们常要用到的 `vtourskin.xml` 就是使用 `include` 嵌入到主 `xml` 中。
 
-**03.preview**
+#### 03.preview
 
-预览图设置，也就是全景图完全载入之前的模糊图像，但因为体积较小，因此载入速度较快，会在全景图之前先载入，避免黑屏。
+预览图设置，也就是全景图完全载入之前的模糊图像。因为体积较小，因此载入速度较快，会在全景图之前先载入，避免黑屏。
 
-**04.image**
+#### 04.image
 
-image 元素控制全景图设置，包括全景图类型，渐进分辨率切片显示等。
+`image` 元素用来设置全景图，包括全景图类型，渐进分辨率切片显示等。
 
-**05.view**
+#### 05.view
 
-view 元素控制全景的视野，例如起始视角、视角限制与缩放等等。当要设置限制视角或设定特定的初始视角时，需要自行设定或使用插件获取代码。
+`view` 元素控制全景的视野，例如起始视角、视角限制与缩放等等。当要设置限制视角或设定特定的初始视角时，需要自行设定或使用插件获取代码。
 
-**06.area**
+#### 06.area
 
-area 元素控制全景图在浏览器窗口中显示区域大小。
+`area` 元素控制全景图在浏览器窗口中显示区域大小。
 
-**07.display**
+#### 07.display
 
 控制全景图的显示品质。
 
-**08.control**
+#### 08.control
 
 设置鼠标、键盘以及触摸设备对全景浏览的控制方式。
 
-**09.cursors**
+#### 09.cursors
 
 设置鼠标光标样式。
 
-**10.autorotate**
+#### 10.autorotate
 
 控制自动旋转。
 
-**11.plugin**
+#### 11.plugin
 
 用来调用插件、插入图片或生成容器。
 
-**12.layer**
+#### 12.layer
 
-与 ``plugin`` 作用相同，只是名称不同。
+与 `plugin` 作用相同，只是名称不同。
 
-**13.hotspot**
+#### 13.hotspot
 
 热点，可在 3D 空间中插入图片，使之随着 3D 空间一同运动，可制作很多特效。
 
-**14.style**
+#### 14.style
 
 可以保存其它元素的属性子集。
 
-**15.events**
+#### 15.events
 
 可调用各类型事件，例如全景载入的不同阶段以及鼠标触发的不同行为等。
 
-**16.action**
+#### 16.action
 
 自定义动态代码。
 
-**17.contextmenu**
+#### 17.contextmenu
 
 定义右键菜单的内容。
 
-**18.network**
+#### 18.network
 
 控制图像的下载、缓存与解码。
 
-**19.menory**
+#### 19.menory
 
 控制全景图在设备中的存储。
 
-**20.security**
+#### 20.security
 
-``Flashplayer`` 和 ``HTML5`` 相关的安全/跨域设置。
+`Flashplayer` 和 `HTML5` 相关的安全/跨域设置。
 
-**21.lensflareset**
+#### 21.lensflareset
 
-镜头眩光的设置（目前只能在 ``flash`` 下使用）。
+镜头眩光的设置（目前只能在 `flash` 下使用）。
 
-**22.lensflare**
+#### 22.lensflare
 
-生成镜头眩光（目前只能在 ``flash`` 下使用）。
+生成镜头眩光（目前只能在 `flash` 下使用）。
 
-**23.data**
+#### 23.data
 
 可放置任意的数据。
 
-**24.scene**
+#### 24.scene
 
-可放置任意 ``krpano`` 元素。每个 ``scene`` 元素只有在被 ``loadscene`` 时才会被载入到浏览器进行解析。
+可放置任意 `krpano` 元素。每个 `scene` 元素只有在被 `loadscene` 时才会被载入到浏览器进行解析。
 
 ## 常用设置
+
+### 常用设置目录
+
+* [小行星开场](#小行星开场)
+* [加载动画](#加载动画)
+* [修改右键菜单](#修改右键菜单)
+* [自定义热点](#自定义热点)
+* [隐藏皮肤](#隐藏皮肤)
+* [添加动态热点](#动态热点)
+* [动态热点添加始终显示的文字](#动态热点添加始终显示的文字)
+* [热点和或图层在鼠标点击或鼠标悬停时进入动态模式](#热点和或图层在鼠标点击或鼠标悬停时进入动态模式)
+* [拖拽热点](#拖拽热点)
+* [添加简单的全景视频](#添加简单的全景视频)
+* [添加雨雪特效](#添加雨雪特效)
+* [自动旋转](#自动旋转)
+* [无按钮控制的自动旋转](#无按钮控制的自动旋转)
+* [按钮控制的自动旋转](#按钮控制的自动旋转)
+* [添加陀螺仪](#添加陀螺仪)
+* [场景过渡效果](#场景过渡效果)
+* [隐藏显示热点](#隐藏显示热点)
+* [获取全景视频进度](#获取全景视频进度)
+* [用 js 控制全景](#用-js-控制场景跳转)
+
 ### 小行星开场
-开启小行星，先找到 ``tour.xml`` ，然后搜索 ``littleplanetintro`` 将其值设置为 ``true`` 即可。
+开启小行星，先找到 `tour.xml` ，然后搜索 `littleplanetintro` 将其值设置为 `true` 即可。
 
 ```xml
 <skin_settings
@@ -326,14 +335,14 @@ area 元素控制全景图在浏览器窗口中显示区域大小。
 ```
 
 ### 加载动画
-在官方的案例文件夹中找到 ``loading-progress`` 这个文件夹，将需要的文件内容复制到项目中的 ``skin`` 文件夹，然后在 ``tour.xml`` 文件中引入该文件即可，这样重新打开就可以看到有动态的进度条了。
+在官方的案例文件夹中找到 `loading-progress` 这个文件夹，将需要的文件内容复制到项目中的 `skin` 文件夹，然后在 `tour.xml` 文件中引入该文件即可，这样重新打开就可以看到有动态的进度条了。
 
 ```xml
 <include url="skin/loadingbar.xml" />
 ```
 
 ### 修改右键菜单
-找到引入的皮肤文件，默认在 ``vtourskin.xml`` ，然后修改下面这些地方即可自定义右键菜单，但像版权、全屏菜单即使删除也会存在。
+找到引入的皮肤文件，默认在 `vtourskin.xml` ，然后修改下面这些地方即可自定义右键菜单，但像版权、全屏菜单即使删除也会存在。
 
 ```xml
 <contextmenu>
@@ -341,20 +350,17 @@ area 元素控制全景图在浏览器窗口中显示区域大小。
 </contextmenu>
 ```
   
-  
+#### contextmenu 元素
 
-
-**contextmenu元素**
-
-- ``caption`` 右键菜单显示的文字
-- ``onclick`` 控制点击后执行的动作，动作由 ``action`` 定义
-- ``showif`` 显示条目的条件
-- ``devices`` 控制在 ``flash/webgl`` 哪个模式中出现
-- ``separator`` 显示分隔符来分隔菜单
+- `caption` 右键菜单显示的文字；
+- `onclick` 控制点击后执行的动作，动作由 `action` 定义；
+- `showif` 显示条目的条件；
+- `devices` 控制在 `flash/webgl` 哪个模式中出现；
+- `separator` 显示分隔符来分隔菜单；
 
 ### 自定义热点
 
-配置 ``<hotspot>`` 中 ``style`` 的属性对应的元素（``skin``对应的文件夹）
+配置 `<hotspot>` 中 `style` 的属性对应的元素（`skin`对应的文件夹）。
 
 ```xml
 <hotspot name="spot1" style="skin_hotspotstyle" ath="93.531" atv="-1.109" linkedscene="scene_shuilifang" />
@@ -389,7 +395,7 @@ area 元素控制全景图在浏览器窗口中显示区域大小。
 
 ### 动态热点
 
-在 `tour.xml` 空白处的scene标签的外面，添加动作代码
+在 `tour.xml` 空白处的 scene 标签的外面，添加动作代码
 
 ```xml
 <action name="do_crop_animation">
@@ -521,7 +527,7 @@ onloaded="do_crop_animation(64,64, 60);add_all_the_time_tooltip()"
 		onclick="do_crop_animation_onclick(64,64,60)"  ath="-15" atv="-12" onloaded="do_crop_animation_register(64,64)" />
 ```
 
-以上代码执行了一次动态循环后，序列图停留在第一帧，如果只是需要执行一次动态循环，并且序列图停留在最后一帧的话，那么 `do_crop_animation_onclick` 需更改（区别就是 `frame` 这个变量没有重置为 0 ，并且没有重新设置 `crop` ）
+以上代码执行了一次动态循环后，序列图停留在第一帧，如果只是需要执行一次动态循环，并且序列图停留在最后一帧的话，那么 `do_crop_animation_onclick` 需更改（区别就是 `frame` 这个变量没有重置为 0 ，并且没有重新设置 `crop` ）；
 
 ```xml
 <action name="do_crop_animation_onclick"> 
@@ -571,7 +577,7 @@ onloaded="do_crop_animation(64,64, 60);add_all_the_time_tooltip()"
 
 ### 添加简单的全景视频
 
-从 `viewer/examples/videopano` 中复制 `vtourskin.xml`，在主xml 添加代码
+从 `viewer/examples/videopano` 中复制 `vtourskin.xml`，在主 xml 添加代码
 
 ```xml
 	<scene name="videopano" title="户外全景视频">
@@ -649,9 +655,9 @@ horizon="0.0"
 tofov="120.0"
 />
 ```
-- `waittime` 代表在最近一次用户交互行为之后要开始自动旋转之前的等待时间。以秒为单位。  
-- `speed` 为旋转速度。当该数值为正值时向右旋转，为负值时向左旋转。
-- `horizon` 为场景在自动旋转时将达到的水平位置。
+- `waittime` 代表在最近一次用户交互行为之后要开始自动旋转之前的等待时间。以秒为单位；
+- `speed` 为旋转速度。当该数值为正值时向右旋转，为负值时向左旋转；
+- `horizon` 为场景在自动旋转时将达到的水平位置；
 - `tofov` 为旋转中要达到的视场角。
 
 
@@ -761,7 +767,7 @@ gyro="true"
 
 ### 场景过渡效果
 
-修改全部过渡效果，只需修改 `<skin_settings />`中以下代码
+修改全部过渡效果，只需修改 `<skin_settings />` 中以下代码。
 
 ```xml
 loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
@@ -841,9 +847,8 @@ loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
 </action>
 ```
 
-### 用js控制全景
+### 用 js 控制场景跳转
 
-js控制场景跳转
 
 ```javascript
 // 场景跳转 index:0,1,2
@@ -872,6 +877,12 @@ function krpanoTo(index){
 </action>
 ```
 
+## 总结
+以上为自己在学习与开发过程中记录的笔记，欢迎多多交流。
+
+### 参考链接
+- 参考链接 1： https://krpano.milly.me/
+- 参考链接 2: http://www.krpano360.com/
 
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
