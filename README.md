@@ -10,14 +10,6 @@ Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](h
 ## 目录
 
 * [Krpano 功能简介](#krpano-功能简介)
-	* [MAKE PANO (NORMAL)](#make-pano-normal)
-	* [MAKE PANO (MULTIRES)](#make-pano-multires)
-	* [MAKE PANO (SINGLESWF)](#make-pano-singleswf)
-	* [MAKE VTOUR (NORMAL)](#make-vtour-normal)
-	* [MAKE VTOUR (MULTIRES)](#make-vtour-multires)
-	* [Convert SPHERE to CUBE](#convert-sphere-to-cube)
-	* [Convert CUBE to SPHERE](#convert-cube-to-sphere)
-	* [Encrypt XML](#encrypt-xml)
 * [vtour 文件夹说明](#vtour-文件夹说明)
 	* [vtour 文件夹结构](#vtour-文件夹结构)
 	* [vtour 运作机制](#vtour-运作机制)
@@ -47,6 +39,16 @@ Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](h
 ## Krpano 功能简介
 官方软件安装之后，解压后的文件夹里主要有六种全景的模式，其中 `MAKE　PANO` 为单全景模式， `MAKE VTOUR` 为多个全景合集的 **虚拟漫游** 。
 
+### Krpano 功能简介目录
+* [MAKE PANO (NORMAL)](#make-pano-normal)
+* [MAKE PANO (MULTIRES)](#make-pano-multires)
+* [MAKE PANO (SINGLESWF)](#make-pano-singleswf)
+* [MAKE VTOUR (NORMAL)](#make-vtour-normal)
+* [MAKE VTOUR (MULTIRES)](#make-vtour-multires)
+* [Convert SPHERE to CUBE](#convert-sphere-to-cube)
+* [Convert CUBE to SPHERE](#convert-cube-to-sphere)
+* [Encrypt XML](#encrypt-xml)
+	
 ### MAKE PANO (NORMAL)
 
 #### 简介
