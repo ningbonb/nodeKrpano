@@ -2,7 +2,7 @@
 Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](https://krpano.com) 。
 
 ### 预览地址
-[demo][demo]
+[http://go.163.com/2015/public/team/ningbo/krpano/comn01/][demo]
 
 ### 版本说明
 本篇文章使用的版本为：krpano 1.19-pr16 (build 2018-04-04) Windows；文章更新前的版本为：krpano-1.19-pr10，文章将逐步更新为最新的 pr16 版本。
