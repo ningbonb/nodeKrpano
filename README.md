@@ -44,15 +44,6 @@ Krpano 可以方便快速的构建全景场景或全景视频，[官网地址](h
 	* [获取全景视频进度](#获取全景视频进度)
 	* [用js控制全景](#用js控制全景)
 
-----------
-
-原文链接：  
-[https://krpano.milly.me/][link1]
-[http://www.krpano360.com/][link2]
-
-GitHub: [nodeKrpano][github]
-
-
 ## Krpano 功能简介
 官方软件安装之后，解压后的文件夹里主要有六种全景的模式，其中 `MAKE　PANO` 为单全景模式， `MAKE VTOUR` 为多个全景合集的 **虚拟漫游** 。
 
