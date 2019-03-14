@@ -882,7 +882,7 @@ function krpanoTo(index){
 
 ### 参考链接
 - 参考链接 1： https://krpano.milly.me/
-- 参考链接 2: http://www.krpano360.com/
+- 参考链接 2： http://www.krpano360.com/
 
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
