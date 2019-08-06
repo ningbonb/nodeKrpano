@@ -619,7 +619,7 @@ onloaded="do_crop_animation(64,64, 60);add_all_the_time_tooltip()"
  
 ### 添加雨雪特效
 
-1. 添加文件 [https://pan.baidu.com/s/1enCKYvaS-M91CSMHbEWMPg][snow] 密码：sexn  
+1. 添加文件 [https://pan.baidu.com/s/12Dkr2jeAWVmzbzE5RrU0RA][snow] 密码：gyrc 
   
 2. 在 `viewer\plugins` 拷贝 `snow.swf` 和 `snow.js`  
 
