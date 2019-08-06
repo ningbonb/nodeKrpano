@@ -887,5 +887,5 @@ function krpanoTo(index){
 [link1]:https://krpano.milly.me/
 [link2]:http://www.krpano360.com/
 [github]:https://github.com/NalvyBoo/nodeKrpano/
-[snow]:http://pan.baidu.com/s/1gfLTx6N
+[snow]:https://pan.baidu.com/s/12Dkr2jeAWVmzbzE5RrU0RA
 [demo]:http://go.163.com/2015/public/team/ningbo/krpano/comn01/
